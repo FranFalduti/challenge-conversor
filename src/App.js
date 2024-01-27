@@ -1,12 +1,14 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
 import { URL_API, URL_DOLAR } from './utils';
-import buttonImage from './img/Button.png'
+import buttonImage from './img/Button.svg';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Autocomplete, TextField, InputAdornment } from "@mui/material"
 
 function App() {
   const [currencyOptions, setCurrencyOptions] = useState([]);
-  const [fromCurrency, setFromCurrency] = useState();
-  const [toCurrency, setToCurrency] = useState();
+  const [fromCurrency, setFromCurrency] = useState("EUR");
+  const [toCurrency, setToCurrency] = useState('USD');
   const [exchangeRate, setExchangeRate] = useState();
   const [amount, setAmount] = useState(1.00);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
@@ -59,43 +61,63 @@ function App() {
     setAmountInFromCurrency(true)
   }
 
-  function handleToAmountChange(e) {
-    setAmount(e.target.value)
-    setAmountInFromCurrency(false)
-  }
-
   function invertCurrency() {
-    setFromCurrency(toCurrency);
     setToCurrency(fromCurrency);
+    setFromCurrency(toCurrency);
   }
 
   return (
     <div className="app">
-      <header className="currencyExchange">
-        <p>Currency exchange</p>
-      </header>
+      <div className="currency-exchange">
+        <p className='header-title'>Currency exchange</p>
+      </div>
       <div>
         <div>
           <p>100 EUR to USD - Convert Euros to US Dollars</p>
         </div>
       </div>
       <div>
-        <input type="number" className="input" value={fromAmount} onChange={handleFromAmountChange} />
-        <select value={fromCurrency} onChange={e => setFromCurrency(e.target.value)}>
-          {currencyOptions.map(option => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
+        <div>
+          <TextField
+            value={fromAmount}
+            onChange={handleFromAmountChange}
+            fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  $
+                </InputAdornment>
+              ),
+            }}
+          />
+        </div>
+        <div>
+          <Autocomplete
+            value={fromCurrency}
+            disableClearable
+            onChange={(evento) => setFromCurrency(evento)}
+            popupIcon={<KeyboardArrowDownIcon />}
+            options={currencyOptions}
+            renderInput={(params) => (
+              <TextField {...params} variant="outlined" />
+            )}
+          />
+        </div>
       </div>
       <div className="equals">
-      <input type="image" src={buttonImage} onClick={invertCurrency}/>
-        </div>
+        <input type="image" src={buttonImage} alt='' onClick={invertCurrency} />
+      </div>
       <div>
-        <select value={toCurrency} onChange={e => setToCurrency(e.target.value)}>
-          {currencyOptions.map(option => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
+        <Autocomplete
+          value={toCurrency}
+          disableClearable
+          onChange={(evento) => setToCurrency(evento)}
+          popupIcon={<KeyboardArrowDownIcon />}
+          options={currencyOptions}
+          renderInput={(params) => (
+            <TextField {...params} variant="outlined" />
+          )}
+        />
         <p>{toAmount}</p>
       </div>
     </div>

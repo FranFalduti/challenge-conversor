@@ -1,29 +1,26 @@
-body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  text-align: center;
+.app {
+  width: 1280px;
+  height: 295px;
+  top: 60px;
 }
 
-h1 {
-  margin: 0;
-  margin-bottom: .5rem;
+.currency-exchange {
+  width: 1280px;
+  height: 60px;
+  background: #0E1342;
+  box-shadow: 0px 4px 4px 0px #00000040;
 }
 
-.input {
-  border: 1px solid #333;
-  border-radius: .3em;
-  padding: .25rem;
-  width: 7em;
-}
-
-select {
-  margin-left: .5rem;
-}
-
-.equals {
-  font-weight: bold;
-  font-size: 2rem;
+.header-title {
+  width: 709.97px;
+  height: 20px;
+  top: 20px;
+  left: 54.61px;
+  font-family: Inter;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #ffffff;
 }
