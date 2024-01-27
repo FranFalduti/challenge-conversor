@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
-import CurrencyRow from './CurrencyRow'
-import { URL_API } from './utils';
+import { URL_API, URL_DOLAR } from './utils';
+import buttonImage from './img/Button.png'
 
 function App() {
   const [currencyOptions, setCurrencyOptions] = useState([]);
@@ -25,7 +25,6 @@ function App() {
       .then(res => res.json())
       .then(respuesta => {
         const firstCurrency = Object.keys(respuesta.rates)[0]
-        /*         setCurrencyOptions([respuesta.base, ...Object.keys(respuesta.rates)]) */
         const numerosFiltrados = [respuesta.base, ...Object.keys(respuesta.rates).filter((pais) => {
           return pais === 'EUR' || pais === 'USD'
         })];
@@ -33,15 +32,19 @@ function App() {
         const resultado = [
           ...new Set(numerosFiltrados)
         ];
-
         setCurrencyOptions(resultado);
-        setFromCurrency(respuesta.base)
         setToCurrency(firstCurrency)
         setExchangeRate(respuesta.rates[firstCurrency])
       })
   }, []);
 
-  console.log('currencyOptions', currencyOptions);
+  useEffect(() => {
+    fetch(URL_DOLAR)
+      .then(res => res.json())
+      .then(respuesta => {
+        setFromCurrency(respuesta.base)
+      })
+  }, []);
 
   useEffect(() => {
     if (fromCurrency != null && toCurrency != null) {
@@ -61,6 +64,11 @@ function App() {
     setAmountInFromCurrency(false)
   }
 
+  function invertCurrency() {
+    setFromCurrency(toCurrency);
+    setToCurrency(fromCurrency);
+  }
+
   return (
     <div className="app">
       <header className="currencyExchange">
@@ -71,21 +79,25 @@ function App() {
           <p>100 EUR to USD - Convert Euros to US Dollars</p>
         </div>
       </div>
-      <CurrencyRow
-        currencyOptions={currencyOptions}
-        selectedCurrency={fromCurrency}
-        onChangeCurrency={e => setFromCurrency(e.target.value)}
-        onChangeAmount={handleFromAmountChange}
-        amount={fromAmount}
-      />
-      <div className="equals">=</div>
-      <CurrencyRow
-        currencyOptions={currencyOptions}
-        selectedCurrency={toCurrency}
-        onChangeCurrency={e => setToCurrency(e.target.value)}
-        onChangeAmount={handleToAmountChange}
-        amount={toAmount}
-      />
+      <div>
+        <input type="number" className="input" value={fromAmount} onChange={handleFromAmountChange} />
+        <select value={fromCurrency} onChange={e => setFromCurrency(e.target.value)}>
+          {currencyOptions.map(option => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
+      </div>
+      <div className="equals">
+      <input type="image" src={buttonImage} onClick={invertCurrency}/>
+        </div>
+      <div>
+        <select value={toCurrency} onChange={e => setToCurrency(e.target.value)}>
+          {currencyOptions.map(option => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
+        <p>{toAmount}</p>
+      </div>
     </div>
   );
 }

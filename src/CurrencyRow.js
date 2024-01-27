@@ -9,9 +9,6 @@ export default function CurrencyRow(props) {
     amount
   } = props;
 
-
-// (n === 'EUR' ? option[1] : option[0])
-
   return (
     <div>
       <input type="number" className="input" value={amount} onChange={onChangeAmount} />
