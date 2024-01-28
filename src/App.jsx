@@ -18,6 +18,8 @@ function App() {
   const [fromAmount, setFromAmount] = useState(1);
   const [toAmount, setToAmount] = useState(1);
   const currencyOptions = ['Dollars', 'Euro'];
+  const [firsRender, setFirstRender] = useState(true);
+
 
   useEffect(() => {
     setFromAmount(amount);
@@ -34,6 +36,10 @@ function App() {
   }
 
   useEffect(() => {
+    if (firsRender) {
+      setFirstRender(false);
+      return; 
+    }
     const fromCurrencyValidated = validador(fromCurrency);
     const toCurrencyValidated = validador(toCurrency);
       fetchData({
@@ -46,7 +52,7 @@ function App() {
         symbols: fromCurrencyValidated,
       }).then(result => setExchangeRateSecond(result.rates[fromCurrencyValidated]));
     
-  }, [fromCurrency, toCurrency]);
+  }, [fromCurrency, toCurrency, firsRender]);
 
 
   return (
