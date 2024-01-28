@@ -6,11 +6,13 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Autocomplete, TextField, InputAdornment } from "@mui/material";
 import ConversorText from './components/conversorText/ConversorText';
 import OtherConversion from './components/otherConversion/OtherConversion';
+import InformationRectangle from './components/informationRectangle/InformationRectangle';
+import CurrencyInfo from './components/currencyInfo/CurrencyInfo';
 
 function App() {
   const [currencyOptions, setCurrencyOptions] = useState([]);
-  const [fromCurrency, setFromCurrency] = useState("EUR");
-  const [toCurrency, setToCurrency] = useState('USD');
+  const [fromCurrency, setFromCurrency] = useState('USD');
+  const [toCurrency, setToCurrency] = useState('EUR');
   const [exchangeRate, setExchangeRate] = useState();
   const [amount, setAmount] = useState(1.00);
   const [fromAmount, setFromAmount] = useState();
@@ -64,6 +66,12 @@ function App() {
     setToCurrency(fromCurrency);
     setFromCurrency(toCurrency);
   }
+
+  const helper = {
+    EUR: 'Euro',
+    USD: 'Dollars'
+  };
+
 
   return (
     <div className="app">
@@ -121,7 +129,7 @@ function App() {
                     textAlign: 'left'
                   }
                 }}
-                value={fromCurrency}
+                value={helper[fromCurrency]}
                 disableClearable
                 onChange={(evento, nuevoValor) => {
                   setFromCurrency(nuevoValor);
@@ -149,7 +157,7 @@ function App() {
                     textAlign: 'left'
                   }
                 }}
-                value={toCurrency}
+                value={helper[toCurrency]}
                 disableClearable
                 onChange={(evento, nuevoValor) => setToCurrency(nuevoValor)}
                 popupIcon={<KeyboardArrowDownIcon />}
@@ -163,6 +171,10 @@ function App() {
           <div>
             <ConversorText fromCurrency={fromCurrency} toCurrency={toCurrency} amount={toAmount} value={fromAmount} />
             <OtherConversion fromCurrency={fromCurrency} toCurrency={toCurrency} amount={toAmount} value={fromAmount} />
+          </div>
+          <div>
+            <InformationRectangle />
+            <CurrencyInfo />
           </div>
         </div>
       </div>
