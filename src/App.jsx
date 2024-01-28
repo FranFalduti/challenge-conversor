@@ -68,10 +68,6 @@ function App() {
     setFromCurrency(toCurrency);
   }
 
-  console.log('toCurrency', toCurrency);
-  console.log('fromCurrency', fromCurrency);
-  console.log('currencyOptions', currencyOptions);
-
   return (
     <div className="app">
       <div className="currency-exchange">
@@ -130,7 +126,9 @@ function App() {
                 }}
                 value={fromCurrency}
                 disableClearable
-                onChange={(evento) => setFromCurrency(evento)}
+                onChange={(evento, nuevoValor) => {
+                  setFromCurrency(nuevoValor);
+                }}
                 popupIcon={<KeyboardArrowDownIcon />}
                 options={currencyOptions}
                 renderInput={(params) => (
@@ -156,7 +154,7 @@ function App() {
                 }}
                 value={toCurrency}
                 disableClearable
-                onChange={(evento) => setToCurrency(evento)}
+                onChange={(evento, nuevoValor) => setToCurrency(nuevoValor)}
                 popupIcon={<KeyboardArrowDownIcon />}
                 options={currencyOptions}
                 renderInput={(params) => (
