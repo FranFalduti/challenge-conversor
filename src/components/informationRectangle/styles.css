@@ -1,11 +1,10 @@
 .information-rectangle {
-    width: 518px;
-    height: 105px;
-    left: 470px;
+    width: 65%;
     border-radius: 8px;
     background: #E8F3FF;
     box-shadow: 0px 2px 4px 0px #0000000D;
-    position: relative;
+    display: grid;
+    align-items: center;
 }
 
 .information-text {
@@ -14,13 +13,10 @@
     font-weight: 400;
     line-height: 36px;
     letter-spacing: 0em;
-    text-align: left;
-    top: 20px;
-    left: 20px;
-    position: relative;
+    margin-left: 1vw;
 }
 
-@media (max-width: 375px) {
+@media (max-width: 376px) {
     .information-rectangle {
         display: none;
     }

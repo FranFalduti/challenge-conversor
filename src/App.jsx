@@ -168,13 +168,15 @@ function App() {
               />
             </div>
           </div>
-          <div>
-            <ConversorText fromCurrency={fromCurrency} toCurrency={toCurrency} amount={toAmount} value={fromAmount} />
-            <OtherConversion fromCurrency={fromCurrency} toCurrency={toCurrency} amount={toAmount} value={fromAmount} />
-          </div>
-          <div>
-            <InformationRectangle />
-            <CurrencyInfo />
+          <div className='extra-components'>
+            <div className='conversors-information'>
+              <ConversorText fromCurrency={fromCurrency} toCurrency={toCurrency} amount={toAmount} value={fromAmount} />
+              <OtherConversion fromCurrency={fromCurrency} toCurrency={toCurrency} amount={toAmount} value={fromAmount} />
+            </div>
+            <div className='conversors-information-second'>
+              <InformationRectangle />
+              <CurrencyInfo />
+            </div>
           </div>
         </div>
       </div>

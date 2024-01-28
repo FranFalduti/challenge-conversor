@@ -1,9 +1,6 @@
 .real-conversion {
-    width: 330px;
-    height: 72px;
-    top: 40px;
-    left: 50px;
-    position: relative;
+    width: 60%;
+    height: auto;
 }
 
 .amount {

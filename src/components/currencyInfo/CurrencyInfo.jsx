@@ -7,9 +7,9 @@ export default function CurrencyInfo() {
         <div className='currency-info'>
             <p className='currency-text'>
                 <a href="https://www.xe.com/currency/eur-euro/" target="_blank" className='currency-text'>Euro </a>
-                to
+                &nbsp;to&nbsp;
                 <a href="https://www.xe.com/currency/usd-us-dollar/" target="_blank" className='currency-text'>
-                    US Dollar
+                    US Dollar&nbsp;
                 </a>
                 conversion — Last updated Dec 15, 2022, 19:17 UTC
             </p>
