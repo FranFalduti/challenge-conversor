@@ -115,14 +115,6 @@
 }
 
 @media (max-width: 375px) {
-/*   .currency-exchange {
-    display: flex;
-  }
-
-  .header-title {
-    margin: 15px 0 15px 20px;
-  } */
-
   .main-background {
     background: linear-gradient(#1A8DFF 40%, #FFFFFF 40%);
   }

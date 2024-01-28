@@ -8,9 +8,9 @@ export default function OtherConversion(props) {
     exchangeRateSecond,
   } = props;
 
-  const newCurrency = fromCurrency === 'EUR' ? 'USD' : 'EUR'; 
+  const newCurrency = fromCurrency === 'Euro' ? 'USD' : 'EUR'; 
 
-  const otherCurrency = fromCurrency === 'EUR' ? 'EUR' : 'USD'; 
+  const otherCurrency = fromCurrency === 'Euro' ? 'EUR' : 'USD'; 
 
 
   return (

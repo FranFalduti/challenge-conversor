@@ -9,9 +9,9 @@ export default function ConversorText(props) {
     value
   } = props;
 
-  const newCurrency = fromCurrency === 'EUR' ? 'Euro' : 'US Dollars'; 
+  const newCurrency = fromCurrency === 'Euro' ? 'Euro' : 'US Dollars'; 
 
-  const otherCurrency = toCurrency === 'EUR' ? 'Euro' : 'US Dollars'; 
+  const otherCurrency = toCurrency === 'Euro' ? 'Euro' : 'US Dollars'; 
 
   return (
     <div className='real-conversion'>

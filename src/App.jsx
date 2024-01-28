@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
-import { URL_API, URL_DOLAR } from './utils';
+import { URL_API } from './utils';
 import buttonImage from './img/Button.svg';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Autocomplete, TextField, InputAdornment } from "@mui/material";
@@ -10,14 +10,14 @@ import InformationRectangle from './components/informationRectangle/InformationR
 import CurrencyInfo from './components/currencyInfo/CurrencyInfo';
 
 function App() {
-  const [currencyOptions, setCurrencyOptions] = useState([]);
-  const [fromCurrency, setFromCurrency] = useState('USD');
-  const [toCurrency, setToCurrency] = useState('EUR');
+  const [fromCurrency, setFromCurrency] = useState('Dollars');
+  const [toCurrency, setToCurrency] = useState('Euro');
   const [exchangeRate, setExchangeRate] = useState();
   const [exchangeRateSecond, setExchangeRateSecond] = useState();
   const [amount, setAmount] = useState(1.00);
   const [fromAmount, setFromAmount] = useState(1);
   const [toAmount, setToAmount] = useState(1);
+  const currencyOptions = ['Dollars', 'Euro'];
 
   useEffect(() => {
     setFromAmount(amount);
@@ -25,16 +25,18 @@ function App() {
   }, [fromAmount, amount, exchangeRate]);
 
   useEffect(() => {
-      fetch(`${URL_API}?base=${fromCurrency}&symbols=${toCurrency}`)
-        .then(res => res.json())
-        .then(resultado => setExchangeRate(resultado.rates[toCurrency]))
+    const asd = fromCurrency === 'Euro' ? 'EUR' : 'USD';
+    const fth = toCurrency === 'Euro' ? 'EUR' : 'USD';
+    fetch(`${URL_API}?base=${asd}&symbols=${fth}`)
+      .then(res => res.json())
+      .then(resultado => setExchangeRate(resultado.rates[fth]))
 
-      fetch(`${URL_API}?base=${toCurrency}&symbols=${fromCurrency}`)
-        .then(res => res.json())
-        .then(resultado => setExchangeRateSecond(resultado.rates[fromCurrency]))
+    fetch(`${URL_API}?base=${fth}&symbols=${asd}`)
+      .then(res => res.json())
+      .then(resultado => setExchangeRateSecond(resultado.rates[asd]))
   }, [fromCurrency, toCurrency]);
 
-  function handleFromAmountChange(e) {
+  function amountSetter(e) {
     setAmount(e.target.value)
   }
 
@@ -68,7 +70,7 @@ function App() {
                   }
                 }}
                 value={fromAmount}
-                onChange={handleFromAmountChange}
+                onChange={amountSetter}
                 fullWidth
                 type='number'
                 onKeyDown={(event) => {
@@ -105,7 +107,7 @@ function App() {
                   setFromCurrency(nuevoValor);
                 }}
                 popupIcon={<KeyboardArrowDownIcon />}
-                options={['USD', 'EUR']}
+                options={currencyOptions}
                 renderInput={(params) => (
                   <TextField {...params} variant="outlined" />
                 )}
@@ -131,7 +133,7 @@ function App() {
                 disableClearable
                 onChange={(evento, nuevoValor) => setToCurrency(nuevoValor)}
                 popupIcon={<KeyboardArrowDownIcon />}
-                options={['USD', 'EUR']}
+                options={currencyOptions}
                 renderInput={(params) => (
                   <TextField {...params} variant="outlined" />
                 )}
