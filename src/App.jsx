@@ -39,12 +39,12 @@ function App() {
       fetchData({
         base: fromCurrencyValidated,
         symbols: toCurrencyValidated,
-      }).then(resultado => setExchangeRate(resultado.rates[toCurrencyValidated]));
+      }).then(result => setExchangeRate(result.rates[toCurrencyValidated]));
 
       fetchData({
         base: toCurrencyValidated,
         symbols: fromCurrencyValidated,
-      }).then(resultado => setExchangeRateSecond(resultado.rates[fromCurrencyValidated]));
+      }).then(result => setExchangeRateSecond(result.rates[fromCurrencyValidated]));
     
   }, [fromCurrency, toCurrency]);
 
@@ -147,7 +147,7 @@ function App() {
           <div className='extra-components'>
             <div className='conversors-information'>
               <ConversorText fromCurrency={fromCurrency} toCurrency={toCurrency} amount={toAmount} value={fromAmount} />
-              <OtherConversion fromCurrency={fromCurrency} exchangeRateSecond={exchangeRateSecond} value={fromAmount} />
+              <OtherConversion fromCurrency={fromCurrency} toCurrency={toCurrency} exchangeRateSecond={exchangeRateSecond} value={fromAmount} />
             </div>
             <div className='conversors-information-second'>
               <InformationRectangle />

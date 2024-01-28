@@ -7,7 +7,6 @@ export const validador = (moneda) => {
     if(moneda === 'Dollars') {
         return 'USD'
     }
-
 };
 
 export function fetchData(params) {
