@@ -4,7 +4,7 @@ _Este es un ejemplo de cómo instalar y lanzar la aplicación._
 
 1. Clonar repositorio
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/FranFalduti/challenge-conversor.git
    ```
 2. Instalar NPM packages
    ```sh
