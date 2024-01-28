@@ -1,0 +1,17 @@
+.other-conversion {
+    width: 173px;
+    height: 36px;
+    top: 100px;
+    left: 50px;
+    position: relative;
+}
+
+.small-amount {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 36px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #757575;    
+}

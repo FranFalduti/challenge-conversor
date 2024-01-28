@@ -1,0 +1,16 @@
+.real-conversion {
+    width: 330px;
+    height: 72px;
+    top: 40px;
+    left: 50px;
+    position: relative;
+}
+
+.amount {
+    font-family: Inter;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 36px;
+    letter-spacing: 0em;
+    text-align: left;
+}
