@@ -13,16 +13,14 @@ function App() {
   const [toCurrency, setToCurrency] = useState('USD');
   const [exchangeRate, setExchangeRate] = useState();
   const [amount, setAmount] = useState(1.00);
-  const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
+  const [fromAmount, setFromAmount] = useState();
+  const [toAmount, setToAmount] = useState();
 
-  let toAmount, fromAmount;
-  if (amountInFromCurrency) {
-    fromAmount = amount
-    toAmount = amount * exchangeRate
-  } else {
-    toAmount = amount
-    fromAmount = amount / exchangeRate
-  }
+  useEffect(() => {
+    setFromAmount(amount);
+    setToAmount(amount * exchangeRate);
+  }, [fromAmount, amount, exchangeRate]);
+
 
   useEffect(() => {
     fetch(URL_API)
@@ -60,7 +58,6 @@ function App() {
 
   function handleFromAmountChange(e) {
     setAmount(e.target.value)
-    setAmountInFromCurrency(true)
   }
 
   function invertCurrency() {
@@ -165,7 +162,7 @@ function App() {
           </div>
           <div>
             <ConversorText fromCurrency={fromCurrency} toCurrency={toCurrency} amount={toAmount} value={fromAmount} />
-            <OtherConversion fromCurrency={fromCurrency} toCurrency={toCurrency} amount={toAmount} value={fromAmount}/>
+            <OtherConversion fromCurrency={fromCurrency} toCurrency={toCurrency} amount={toAmount} value={fromAmount} />
           </div>
         </div>
       </div>
