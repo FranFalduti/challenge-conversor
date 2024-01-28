@@ -14,6 +14,7 @@ function App() {
   const [fromCurrency, setFromCurrency] = useState('USD');
   const [toCurrency, setToCurrency] = useState('EUR');
   const [exchangeRate, setExchangeRate] = useState();
+  const [exchangeRateSecond, setExchangeRateSecond] = useState();
   const [amount, setAmount] = useState(1.00);
   const [fromAmount, setFromAmount] = useState(1);
   const [toAmount, setToAmount] = useState(1);
@@ -23,40 +24,15 @@ function App() {
     setToAmount(amount * exchangeRate);
   }, [fromAmount, amount, exchangeRate]);
 
-
   useEffect(() => {
-    fetch(URL_API)
-      .then(res => res.json())
-      .then(respuesta => {
-        const firstCurrency = Object.keys(respuesta.rates)[0]
-        const numerosFiltrados = [respuesta.base, ...Object.keys(respuesta.rates).filter((pais) => {
-          return pais === 'EUR' || pais === 'USD'
-        })];
-
-        const resultado = [
-          ...new Set(numerosFiltrados)
-        ];
-        setCurrencyOptions(resultado);
-        setToCurrency(firstCurrency)
-        setExchangeRate(respuesta.rates[firstCurrency])
-      })
-  }, []);
-
-  useEffect(() => {
-    fetch(URL_DOLAR)
-      .then(res => res.json())
-      .then(respuesta => {
-        setFromCurrency(respuesta.base)
-      })
-  }, []);
-
-  useEffect(() => {
-    if (fromCurrency != null && toCurrency != null) {
       fetch(`${URL_API}?base=${fromCurrency}&symbols=${toCurrency}`)
         .then(res => res.json())
         .then(resultado => setExchangeRate(resultado.rates[toCurrency]))
-    }
-  }, [fromCurrency, toCurrency])
+
+      fetch(`${URL_API}?base=${toCurrency}&symbols=${fromCurrency}`)
+        .then(res => res.json())
+        .then(resultado => setExchangeRateSecond(resultado.rates[fromCurrency]))
+  }, [fromCurrency, toCurrency]);
 
   function handleFromAmountChange(e) {
     setAmount(e.target.value)
@@ -66,12 +42,6 @@ function App() {
     setToCurrency(fromCurrency);
     setFromCurrency(toCurrency);
   }
-
-  const helper = {
-    EUR: 'Euro',
-    USD: 'Dollars'
-  };
-
 
   return (
     <div className="app">
@@ -135,7 +105,7 @@ function App() {
                   setFromCurrency(nuevoValor);
                 }}
                 popupIcon={<KeyboardArrowDownIcon />}
-                options={currencyOptions}
+                options={['USD', 'EUR']}
                 renderInput={(params) => (
                   <TextField {...params} variant="outlined" />
                 )}
@@ -161,7 +131,7 @@ function App() {
                 disableClearable
                 onChange={(evento, nuevoValor) => setToCurrency(nuevoValor)}
                 popupIcon={<KeyboardArrowDownIcon />}
-                options={currencyOptions}
+                options={['USD', 'EUR']}
                 renderInput={(params) => (
                   <TextField {...params} variant="outlined" />
                 )}
@@ -171,7 +141,7 @@ function App() {
           <div className='extra-components'>
             <div className='conversors-information'>
               <ConversorText fromCurrency={fromCurrency} toCurrency={toCurrency} amount={toAmount} value={fromAmount} />
-              <OtherConversion fromCurrency={fromCurrency} toCurrency={toCurrency} amount={toAmount} value={fromAmount} />
+              <OtherConversion fromCurrency={fromCurrency} exchangeRateSecond={exchangeRateSecond} value={fromAmount} />
             </div>
             <div className='conversors-information-second'>
               <InformationRectangle />
