@@ -1,4 +1,6 @@
 export const URL_API = 'https://api.vatcomply.com/rates';
+export const LINK_EURO = 'https://www.xe.com/currency/eur-euro/';
+export const LINK_DOLLAR = 'https://www.xe.com/currency/usd-us-dollar/';
 
 export const validador = (moneda) => {
     if(moneda === 'Euro') {

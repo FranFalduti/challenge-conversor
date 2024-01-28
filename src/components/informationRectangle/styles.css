@@ -13,10 +13,10 @@
     font-weight: 400;
     line-height: 36px;
     letter-spacing: 0em;
-    margin-left: 1vw;
+    margin: 1vw 2vw;
 }
 
-@media (max-width: 375px) {
+@media (max-width: 768px) {
     .information-rectangle {
         display: none;
     }
