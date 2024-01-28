@@ -14,11 +14,7 @@ _Este es un ejemplo de cómo instalar y lanzar la aplicación._
    ```sh
    npm install
    ```
-4. Instalar Material UI y Material Icons
-   ```sh
-   npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
-   ```
-5. Lanzar la aplicación
+4. Lanzar la aplicación
    ```sh
    npm start
    ```
