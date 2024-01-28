@@ -16,7 +16,7 @@
   line-height: 20px;
   letter-spacing: 0em;
   color: #ffffff;
-  margin: 15px 0 15px 20px;
+  margin: 15px 0 15px 60px;
 }
 
 .main-background {
@@ -115,6 +115,10 @@
 }
 
 @media (max-width: 375px) {
+  .header-title {
+    margin: 15px 0 15px 20px;
+  }
+
   .main-background {
     background: linear-gradient(#1A8DFF 40%, #FFFFFF 40%);
   }
@@ -161,7 +165,7 @@
     width: 85%;
     align-self: end;
     display: block;
-    margin: 20px 20px 0;
+    margin: 91px 20px 0;
   }
 
 }
