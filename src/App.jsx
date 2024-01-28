@@ -129,7 +129,7 @@ function App() {
                     textAlign: 'left'
                   }
                 }}
-                value={helper[fromCurrency]}
+                value={fromCurrency}
                 disableClearable
                 onChange={(evento, nuevoValor) => {
                   setFromCurrency(nuevoValor);
@@ -157,7 +157,7 @@ function App() {
                     textAlign: 'left'
                   }
                 }}
-                value={helper[toCurrency]}
+                value={toCurrency}
                 disableClearable
                 onChange={(evento, nuevoValor) => setToCurrency(nuevoValor)}
                 popupIcon={<KeyboardArrowDownIcon />}
