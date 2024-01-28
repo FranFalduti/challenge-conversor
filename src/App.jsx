@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
-import { URL_API, validador } from './utils';
+import { validador, fetchData } from './utils';
 import buttonImage from './img/Button.svg';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Autocomplete, TextField, InputAdornment } from "@mui/material";
@@ -24,26 +24,30 @@ function App() {
     setToAmount(amount * exchangeRate);
   }, [fromAmount, amount, exchangeRate]);
 
-  useEffect(() => {
-    const fromCurrencyValidated = validador(fromCurrency);
-    const toCurrencyValidated = validador(toCurrency);
-    fetch(`${URL_API}?base=${fromCurrencyValidated}&symbols=${toCurrencyValidated}`)
-      .then(res => res.json())
-      .then(resultado => setExchangeRate(resultado.rates[toCurrencyValidated]))
-
-    fetch(`${URL_API}?base=${toCurrencyValidated}&symbols=${fromCurrencyValidated}`)
-      .then(res => res.json())
-      .then(resultado => setExchangeRateSecond(resultado.rates[fromCurrencyValidated]))
-  }, [fromCurrency, toCurrency]);
-
   function amountSetter(e) {
-    setAmount(e.target.value)
+    setAmount(e.target.value);
   }
 
   function invertCurrency() {
     setToCurrency(fromCurrency);
     setFromCurrency(toCurrency);
   }
+
+  useEffect(() => {
+    const fromCurrencyValidated = validador(fromCurrency);
+    const toCurrencyValidated = validador(toCurrency);
+      fetchData({
+        base: fromCurrencyValidated,
+        symbols: toCurrencyValidated,
+      }).then(resultado => setExchangeRate(resultado.rates[toCurrencyValidated]));
+
+      fetchData({
+        base: toCurrencyValidated,
+        symbols: fromCurrencyValidated,
+      }).then(resultado => setExchangeRateSecond(resultado.rates[fromCurrencyValidated]));
+    
+  }, [fromCurrency, toCurrency]);
+
 
   return (
     <div className="app">
